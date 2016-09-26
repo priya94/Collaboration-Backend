@@ -14,6 +14,9 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.collaborationwebsite.model.User_Details;
+import com.niit.collaborationwebsite.model.Forum;
+import com.niit.collaborationwebsite.model.Event;
 
 @Configuration
 @EnableTransactionManagement
@@ -24,18 +27,18 @@ public class ApplicationContextConfig {
 	public DataSource getOracleDatasource() {
 		DriverManagerDataSource datasource = new DriverManagerDataSource();
 		datasource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		datasource.setUrl("jdbc:oracle:thin:@localhost:1521:oracledb");
-		datasource.setUsername("SYS");
-		datasource.setPassword("pr");
+		datasource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
+		datasource.setUsername("ENTEDB");
+		datasource.setPassword("efg");
 		return datasource;
 	}
 
 	private Properties getHibernateProperties() {
 		Properties properties = new Properties();
 		properties.put("hibernate.show_sql", "true");
-		properties.put("hibernate.format_sql", "true");		
+//		properties.put("hibernate.format_sql", "true");		
 		properties.put("hibernate.dialect", "org.hibernate.dialect.OracleDialect");
-		properties.put("hibernate.hbm2ddl.auto", "update");
+		//properties.put("hibernate.hbm2ddl.auto", "update");
 		return properties;
 	}
 
@@ -43,6 +46,9 @@ public class ApplicationContextConfig {
 	public SessionFactory getSessionFactory(DataSource datasource) {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(datasource);
 		sessionBuilder.addProperties(getHibernateProperties());
+		sessionBuilder.addAnnotatedClass(User_Details.class);
+		sessionBuilder.addAnnotatedClass(Forum.class);
+		sessionBuilder.addAnnotatedClass(Event.class);
 		
 		return sessionBuilder.buildSessionFactory();
 	}
