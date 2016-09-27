@@ -11,9 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationwebsite.DAO.EventDAO;
-import com.niit.collaborationwebsite.DAO.ForumDAO;
 import com.niit.collaborationwebsite.model.Event;
-import com.niit.collaborationwebsite.model.Forum;
+
 
 
 

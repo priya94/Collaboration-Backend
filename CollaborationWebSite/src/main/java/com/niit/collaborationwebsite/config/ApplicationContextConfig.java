@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.niit.collaborationwebsite.model.User_Details;
 import com.niit.collaborationwebsite.model.Forum;
 import com.niit.collaborationwebsite.model.Event;
+import com.niit.collaborationwebsite.model.Blogg;
 
 @Configuration
 @EnableTransactionManagement
@@ -49,6 +50,7 @@ public class ApplicationContextConfig {
 		sessionBuilder.addAnnotatedClass(User_Details.class);
 		sessionBuilder.addAnnotatedClass(Forum.class);
 		sessionBuilder.addAnnotatedClass(Event.class);
+		sessionBuilder.addAnnotatedClass(Blogg.class);
 		
 		return sessionBuilder.buildSessionFactory();
 	}
