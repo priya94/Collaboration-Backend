@@ -38,13 +38,13 @@ public class User_DetailsController {
 	@PutMapping("/UserDetails/{id}")
 	public ResponseEntity<User_Details> updateUser_Details(@PathVariable("id")String id,@RequestBody User_Details user_Details) {
 		
-		if(user_DetailsDAO.get(Id) == null) {
+		if(user_DetailsDAO.getUser_Details(id) == null) {
 			return new ResponseEntity<User_Details>(HttpStatus.NOT_FOUND);
 		}
 		
 	
 		user_Details.setId(id);
-		user_DetailsDAO.update(user_Details);
+		user_DetailsDAO.saveOrUpdateUser_Details(user_Details);
 		
 		return new ResponseEntity<User_Details>(user_Details, HttpStatus.OK);
 		

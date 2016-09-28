@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.niit.collaborationwebsite.DAO.BloggDAO;
 import com.niit.collaborationwebsite.model.Blogg;
@@ -33,17 +35,37 @@ public class BloggController {
 		return new ResponseEntity < List < Blogg >> (listOfBloggs, HttpStatus.OK);
 	}
 
+	@PostMapping("/Blogg/")
+	public ResponseEntity<Void> createBlogg(@RequestBody Blogg blogg,
+			UriComponentsBuilder ucBuilder) {
+		if (bloggDAO.getBlogg(blogg.getId()) != null) {
+
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+
+		}
+
+		/*
+		 * role.setId("ROLE_USER"); role.setName("ROLE_USER");
+		 */
+		blogDAO.save(blog);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(ucBuilder.path("Blog/{id}/").buildAndExpand(blog.getId()).toUri());
+		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+
+	}
+	
 	@PutMapping("/Blogg/{id}")
 	public ResponseEntity<Blogg> updateBlogg(@PathVariable("id") String id,
 			@RequestBody Blogg blogg) {
 		
-		if (bloggDAO.get(id) == null) {
+		if (bloggDAO.getBlogg(id) == null) {
 			return new ResponseEntity<Blogg>(HttpStatus.NOT_FOUND);
 		}
 		blogg.setId(id);
 
 		
-		bloggDAO.update(blogg);
+		bloggDAO.saveOrUpdateBlogg(blogg);
 
 		return new ResponseEntity<Blogg>(blogg, HttpStatus.OK);
 

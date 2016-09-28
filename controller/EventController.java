@@ -38,12 +38,12 @@ public class EventController {
 	public ResponseEntity<Event> updateEvent(@PathVariable("id") String id,
 			@RequestBody Event event) {
 		
-		if (eventDAO.get(id) == null) {
+		if (eventDAO.getEvent(id) == null) {
 			return new ResponseEntity<Event>(HttpStatus.NOT_FOUND);
 		}
 
 		event.setId(id);
-		eventDAO.update(event);
+		eventDAO.saveOrUpdateEvent(event);
 
 		return new ResponseEntity<Event>(event, HttpStatus.OK);
 
