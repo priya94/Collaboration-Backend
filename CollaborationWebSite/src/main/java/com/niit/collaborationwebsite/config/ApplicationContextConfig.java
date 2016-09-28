@@ -19,8 +19,10 @@ import com.niit.collaborationwebsite.model.User_Details;
 import com.niit.collaborationwebsite.model.Forum;
 import com.niit.collaborationwebsite.model.Event;
 import com.niit.collaborationwebsite.model.Blogg;
+import com.niit.collaborationwebsite.model.Blogg_Comment;
 
-@EnableWebMvc
+
+
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("com.niit")
@@ -51,6 +53,7 @@ public class ApplicationContextConfig {
 		sessionBuilder.addAnnotatedClass(Forum.class);
 		sessionBuilder.addAnnotatedClass(Event.class);
 		sessionBuilder.addAnnotatedClass(Blogg.class);
+		sessionBuilder.addAnnotatedClass(Blogg_Comment.class);
 
 		return sessionBuilder.buildSessionFactory();
 	}

@@ -20,8 +20,8 @@ public static void main(String[] args) {
 		Blogg blogg = (Blogg) context.getBean("blogg");
 		
 		
-		blogg.setId("BLOG1");
-		blogg.setTitle("collaboration");
+		blogg.setId("BLOG2");
+		blogg.setTitle("collaboration2");
 		blogg.setDescription("No Blogg Currently");
 		blogg.setCreatedat(new Date(System.currentTimeMillis()));
 		blogg.setStatus("A");
