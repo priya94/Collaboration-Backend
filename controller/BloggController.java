@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collaborationwebsite.DAO.BloggDAO;
@@ -30,5 +33,19 @@ public class BloggController {
 		return new ResponseEntity < List < Blogg >> (listOfBloggs, HttpStatus.OK);
 	}
 
-	
+	@PutMapping("/Blogg/{id}")
+	public ResponseEntity<Blogg> updateBlogg(@PathVariable("id") String id,
+			@RequestBody Blogg blogg) {
+		
+		if (bloggDAO.get(id) == null) {
+			return new ResponseEntity<Blogg>(HttpStatus.NOT_FOUND);
+		}
+		blogg.setId(id);
+
+		
+		bloggDAO.update(blogg);
+
+		return new ResponseEntity<Blogg>(blogg, HttpStatus.OK);
+
+	}
 }
