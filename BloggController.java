@@ -37,24 +37,23 @@ public class BloggController {
 	}
 
 	@PostMapping("/Blogg/")
-	public ResponseEntity<Void> createBlogg(@RequestBody Blogg blogg,
+	public ResponseEntity<Blogg> createBlogg(@RequestBody Blogg blogg,
 			UriComponentsBuilder ucBuilder) {
 		if (bloggDAO.getBlogg(blogg.getId()) != null) {
-
-			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-
+			bloggDAO.saveBlogg(blogg);
+			return new ResponseEntity<Blogg>(blogg, HttpStatus.OK);
+			
+		}
+			return new ResponseEntity<Blogg>(HttpStatus.CONFLICT);
 		}
 
 		/*
 		 * role.setId("ROLE_USER"); role.setName("ROLE_USER");
 		 */
-		bloggDAO.saveOrUpdateBlogg(blogg);
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("Blogg/{id}/").buildAndExpand(blogg.getId()).toUri());
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-
-	}
+		
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setLocation(ucBuilder.path("Blogg/{id}/").buildAndExpand(blogg.getId()).toUri());
+//		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	
 	@PutMapping("/Blogg/{id}")
 	public ResponseEntity<Blogg> updateBlogg(@PathVariable("id") String id,
@@ -63,10 +62,10 @@ public class BloggController {
 		if (bloggDAO.getBlogg(id) == null) {
 			return new ResponseEntity<Blogg>(HttpStatus.NOT_FOUND);
 		}
-		blogg.setId(id);
+		//blogg.setId(id);
 
 		
-		bloggDAO.saveOrUpdateBlogg(blogg);
+		bloggDAO.updateBlogg(blogg);
 
 		return new ResponseEntity<Blogg>(blogg, HttpStatus.OK);
 
