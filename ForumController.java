@@ -37,22 +37,22 @@ public class ForumController {
 	}
 
 	@PostMapping("/Forum/")
-	public ResponseEntity<Void> createForum(@RequestBody Forum forum,
+	public ResponseEntity<Forum> createForum(@RequestBody Forum forum,
 			UriComponentsBuilder ucBuilder) {
 		if (forumDAO.getForum(forum.getId()) != null) {
-
-			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			forumDAO.saveForum(forum);
+			return new ResponseEntity<Forum>(forum, HttpStatus.OK);
 
 		}
 
 		/*
 		 * role.setId("ROLE_USER"); role.setName("ROLE_USER");
 		 */
-		forumDAO.saveOrUpdateForum(forum);
+		
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("Forum/{id}/").buildAndExpand(forum.getId()).toUri());
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		//HttpHeaders headers = new HttpHeaders();
+		//headers.setLocation(ucBuilder.path("Forum/{id}/").buildAndExpand(forum.getId()).toUri());
+		return new ResponseEntity<Forum>(HttpStatus.CONFLICT);
 
 	}
 	
@@ -66,7 +66,7 @@ public class ForumController {
 		forum.setId(id);
 
 		
-		forumDAO.saveOrUpdateForum(forum);
+		forumDAO.updateForum(forum);
 
 		return new ResponseEntity<Forum>(forum, HttpStatus.OK);
 
