@@ -41,11 +41,11 @@ public class User_DetailsController {
 	public ResponseEntity<User_Details> createForum(@RequestBody User_Details user_Details,
 			UriComponentsBuilder ucBuilder) {
 		if (user_DetailsDAO.getUser_Details(user_Details.getId()) != null) {
-			user_DetailsDAO.saveUser_Details(user_Details);
-			return new ResponseEntity<User_Details>(user_Details, HttpStatus.OK);
-
+			
+			return new ResponseEntity<User_Details>(HttpStatus.CONFLICT);
 		}
-
+		user_DetailsDAO.saveUser_Details(user_Details);
+		return new ResponseEntity<User_Details>(user_Details, HttpStatus.OK);
 		/*
 		 * role.setId("ROLE_USER"); role.setName("ROLE_USER");
 		 */
@@ -53,7 +53,7 @@ public class User_DetailsController {
 
 		//HttpHeaders headers = new HttpHeaders();
 		//headers.setLocation(ucBuilder.path("User_Details/{id}/").buildAndExpand(user_Details.getId()).toUri());
-		return new ResponseEntity<User_Details>(HttpStatus.CONFLICT);
+		
 
 	}
 	
