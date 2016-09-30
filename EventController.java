@@ -39,12 +39,13 @@ public class EventController {
 	@PostMapping("/Event/")
 	public ResponseEntity<Event> createEvent(@RequestBody Event event,
 			UriComponentsBuilder ucBuilder) {
-		if (eventDAO.getEvent(event.getId()) != null) {
-			eventDAO.saveEvent(event);
-			return new ResponseEntity<Event>(event, HttpStatus.OK);
-			
-		}
+		if (eventDAO.getEvent(event.getId()) != null) 
+		{
 			return new ResponseEntity<Event>(HttpStatus.CONFLICT);
+		}
+		eventDAO.saveEvent(event);
+		return new ResponseEntity<Event>(event, HttpStatus.OK);	
+		
 		}
 
 		/*
