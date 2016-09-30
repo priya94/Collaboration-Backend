@@ -40,11 +40,12 @@ public class BloggController {
 	public ResponseEntity<Blogg> createBlogg(@RequestBody Blogg blogg,
 			UriComponentsBuilder ucBuilder) {
 		if (bloggDAO.getBlogg(blogg.getId()) != null) {
-			bloggDAO.saveBlogg(blogg);
-			return new ResponseEntity<Blogg>(blogg, HttpStatus.OK);
 			
-		}
 			return new ResponseEntity<Blogg>(HttpStatus.CONFLICT);
+		}
+		bloggDAO.saveBlogg(blogg);
+		return new ResponseEntity<Blogg>(blogg, HttpStatus.OK);
+			
 		}
 
 		/*
