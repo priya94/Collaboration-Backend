@@ -40,11 +40,11 @@ public class ForumController {
 	public ResponseEntity<Forum> createForum(@RequestBody Forum forum,
 			UriComponentsBuilder ucBuilder) {
 		if (forumDAO.getForum(forum.getId()) != null) {
-			forumDAO.saveForum(forum);
-			return new ResponseEntity<Forum>(forum, HttpStatus.OK);
-
+			
+			return new ResponseEntity<Forum>(HttpStatus.CONFLICT);
 		}
-
+		forumDAO.saveForum(forum);
+		return new ResponseEntity<Forum>(forum, HttpStatus.OK);
 		/*
 		 * role.setId("ROLE_USER"); role.setName("ROLE_USER");
 		 */
@@ -52,7 +52,7 @@ public class ForumController {
 
 		//HttpHeaders headers = new HttpHeaders();
 		//headers.setLocation(ucBuilder.path("Forum/{id}/").buildAndExpand(forum.getId()).toUri());
-		return new ResponseEntity<Forum>(HttpStatus.CONFLICT);
+		
 
 	}
 	
