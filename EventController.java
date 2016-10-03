@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -83,4 +84,18 @@ public class EventController {
 		return new ResponseEntity<Event>(event, HttpStatus.OK);
 
 	}
+	
+	@DeleteMapping("/Event/{id}")
+	public ResponseEntity<Event> deleteEvent(@PathVariable("id") String id) {
+
+		event = eventDAO.getEvent(id);
+		if (event == null) {
+
+			return new ResponseEntity<Event>(HttpStatus.NOT_FOUND);
+		}
+
+		eventDAO.deleteEvent(id);
+		return new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
+	}
+	
 }

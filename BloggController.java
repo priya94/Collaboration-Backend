@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -82,4 +83,19 @@ public class BloggController {
 		return new ResponseEntity<Blogg>(blogg, HttpStatus.OK);
 
 	}
+	
+	@DeleteMapping("/Blogg/{id}")
+	public ResponseEntity<Blogg> deleteBlogg(@PathVariable("id") String id) {
+
+		blogg = bloggDAO.getBlogg(id);
+		if (blogg == null) {
+
+			return new ResponseEntity<Blogg>(HttpStatus.NOT_FOUND);
+		}
+
+		bloggDAO.deleteBlogg(id);
+		return new ResponseEntity<Blogg>(HttpStatus.NO_CONTENT);
+	}
+
+	
 }
