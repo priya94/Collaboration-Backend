@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.niit.collaborationwebsite.DAO.ForumDAO;
+import com.niit.collaborationwebsite.model.Event;
 import com.niit.collaborationwebsite.model.Forum;
 
 
@@ -36,6 +37,17 @@ public class ForumController {
 		return new ResponseEntity < List < Forum >> (listOfForums, HttpStatus.OK);
 	}
 
+	@GetMapping("/forum/{id}")
+	public ResponseEntity<Forum> getForum(@PathVariable("id") String id) {
+		forum = forumDAO.getForum(id);
+		if (forum == null) {
+			return new ResponseEntity<Forum>(HttpStatus.NO_CONTENT);
+		}
+
+		return new ResponseEntity<Forum>(forum, HttpStatus.OK);
+
+	}
+	
 	@PostMapping("/Forum/")
 	public ResponseEntity<Forum> createForum(@RequestBody Forum forum,
 			UriComponentsBuilder ucBuilder) {
