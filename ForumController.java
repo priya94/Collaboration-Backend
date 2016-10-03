@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -82,6 +83,19 @@ public class ForumController {
 
 		return new ResponseEntity<Forum>(forum, HttpStatus.OK);
 
+	}
+	
+	@DeleteMapping("/Forum/{id}")
+	public ResponseEntity<Forum> deleteForum(@PathVariable("id") String id) {
+
+		forum = forumDAO.getForum(id);
+		if (forum == null) {
+
+			return new ResponseEntity<Forum>(HttpStatus.NOT_FOUND);
+		}
+
+		forumDAO.deleteForum(id);
+		return new ResponseEntity<Forum>(HttpStatus.NO_CONTENT);
 	}
 	
 }
