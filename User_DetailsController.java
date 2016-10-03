@@ -37,6 +37,17 @@ public class User_DetailsController {
 		return new ResponseEntity < List < User_Details >> (listOfUsers, HttpStatus.OK);
 	}
 
+	@GetMapping("/user/{id}")
+	public ResponseEntity<User_Details> getUser_Details(@PathVariable("id") String id) {
+		user_Details = user_DetailsDAO.getUser_Details(id);
+		if (user_Details == null) {
+			return new ResponseEntity<User_Details>(HttpStatus.NO_CONTENT);
+		}
+
+		return new ResponseEntity<User_Details>(user_Details, HttpStatus.OK);
+
+	}
+	
 	@PostMapping("/User_Details/")
 	public ResponseEntity<User_Details> createForum(@RequestBody User_Details user_Details,
 			UriComponentsBuilder ucBuilder) {
