@@ -36,6 +36,18 @@ public class EventController {
 		}
 		return new ResponseEntity < List < Event >> (listOfEvents, HttpStatus.OK);
 	}
+	
+	@GetMapping("/event/{id}")
+	public ResponseEntity<Event> getEvent(@PathVariable("id") String id) {
+		event = eventDAO.getEvent(id);
+		if (event == null) {
+			return new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
+		}
+
+		return new ResponseEntity<Event>(event, HttpStatus.OK);
+
+	}
+	
 	@PostMapping("/Event/")
 	public ResponseEntity<Event> createEvent(@RequestBody Event event,
 			UriComponentsBuilder ucBuilder) {
