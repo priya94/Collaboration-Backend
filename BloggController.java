@@ -35,6 +35,17 @@ public class BloggController {
 		}
 		return new ResponseEntity < List < Blogg >> (listOfBloggs, HttpStatus.OK);
 	}
+	
+	@GetMapping("/Blogg/{id}")
+	public ResponseEntity<Blogg> getBlogg(@PathVariable("id") String id) {
+		blogg = bloggDAO.getBlogg(id);
+		if (blogg == null) {
+			return new ResponseEntity<Blogg>(HttpStatus.NO_CONTENT);
+		}
+
+		return new ResponseEntity<Blogg>(blogg, HttpStatus.OK);
+
+	}
 
 	@PostMapping("/Blogg/")
 	public ResponseEntity<Blogg> createBlogg(@RequestBody Blogg blogg,
