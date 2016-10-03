@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -82,5 +83,19 @@ public class User_DetailsController {
 		return new ResponseEntity<User_Details>(user_Details, HttpStatus.OK);
 		
 	}
+	
+	@DeleteMapping("/User_Details/{id}")
+	public ResponseEntity<User_Details> deleteUser_Details(@PathVariable("id") String id) {
+
+		user_Details = user_DetailsDAO.getUser_Details(id);
+		if (user_Details == null) {
+
+			return new ResponseEntity<User_Details>(HttpStatus.NOT_FOUND);
+		}
+
+		user_DetailsDAO.deleteUser_Details(id);
+		return new ResponseEntity<User_Details>(HttpStatus.NO_CONTENT);
+	}
+	
 	
 }
