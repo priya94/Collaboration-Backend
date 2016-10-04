@@ -78,6 +78,14 @@ public class ForumDAOImpl implements ForumDAO{
 		return listOfForum;
 	}
 
-	
+	private Integer getMaxId()
+	{
+		String hql = "select max(id) from Forum";
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		Integer maxID = (Integer) query.uniqueResult();
+		return maxID;
+		
+	}
 	
 }
