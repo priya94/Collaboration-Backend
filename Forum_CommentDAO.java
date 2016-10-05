@@ -10,9 +10,9 @@ public interface Forum_CommentDAO {
 	
 	public boolean updateForum_Comment(Forum_Comment forum_Comment);
 	
-	void deleteForum_Comment(String Id);
+	void deleteForum_Comment(String fCId);
 	
-	Forum_Comment getForum_Comment(String Id);
+	Forum_Comment getForum_Comment(String fCId);
 	
 	List<Forum_Comment> listForum_Comments();
 	
