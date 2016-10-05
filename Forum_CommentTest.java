@@ -1,7 +1,5 @@
 package com.niit.collaborationwebsite;
 
-
-
 import java.util.Date;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -17,7 +15,7 @@ public class Forum_CommentTest {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		context.scan("com.niit");
 		context.refresh();
-		Forum_CommentDAO forum_CommentDAO = (Forum_CommentDAO) context.getBean("forum_Comment");
+		Forum_CommentDAO forum_CommentDAO = (Forum_CommentDAO) context.getBean("forum_CommentDAO");
 		Forum_Comment forum_Comment = (Forum_Comment) context.getBean("forum_Comment");
 		
 		
@@ -27,7 +25,7 @@ public class Forum_CommentTest {
 		forum_Comment.setCommentedat(new Date (System.currentTimeMillis()));
 		
 		forum_CommentDAO.saveForum_Comment(forum_Comment);
-		if(forum_CommentDAO.getForum_Comment("FC01")== null){
+		if(forum_CommentDAO.getForum_Comment("BC01")== null){
 			System.out.println("Forum Comment does not exists");
 		}
 		else{
