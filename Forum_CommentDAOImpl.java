@@ -2,16 +2,17 @@ package com.niit.collaborationwebsite.DAOImpl;
 
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationwebsite.DAO.Forum_CommentDAO;
 import com.niit.collaborationwebsite.model.Forum_Comment;
 
+@Repository("forum_CommentDAO")
 public class Forum_CommentDAOImpl implements Forum_CommentDAO{
 
 	@Autowired
@@ -42,7 +43,7 @@ public class Forum_CommentDAOImpl implements Forum_CommentDAO{
 	    }
 		return true;
 	}
-	
+	@Transactional
 	public void deleteForum_Comment(String fCId){
 		Forum_Comment forum_CommentToDelete= new Forum_Comment();
 		forum_CommentToDelete.setfCId(fCId);
