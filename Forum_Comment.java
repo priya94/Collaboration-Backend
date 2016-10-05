@@ -2,8 +2,12 @@ package com.niit.collaborationwebsite.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.springframework.stereotype.Component;
+@Entity
+@Component
 public class Forum_Comment extends BaseDomain{
 
 	@Id
@@ -11,6 +15,8 @@ public class Forum_Comment extends BaseDomain{
 	private String fCContent;
 	private String userId;
 	private Date commentedat;
+	
+	
 	public String getfCId() {
 		return fCId;
 	}
