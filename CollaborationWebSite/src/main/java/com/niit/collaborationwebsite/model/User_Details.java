@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 
-public class User_Details {
+public class User_Details extends BaseDomain{
 
 	@Id
 	private String Id;

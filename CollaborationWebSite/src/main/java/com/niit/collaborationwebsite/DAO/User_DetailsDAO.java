@@ -6,7 +6,9 @@ import com.niit.collaborationwebsite.model.User_Details;
 
 public interface User_DetailsDAO {
 
-void saveOrUpdateUser_Details(User_Details user_Details);
+	public boolean saveUser_Details(User_Details user_Details);
+
+	public boolean updateUser_Details(User_Details user_Details);
 	
 	void deleteUser_Details(String Id);
 	

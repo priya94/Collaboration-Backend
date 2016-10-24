@@ -3,6 +3,7 @@ package com.niit.collaborationwebsite.DAOImpl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 
@@ -26,10 +27,28 @@ public class User_DetailsDAOImpl implements User_DetailsDAO{
 	}
 
 	@Transactional
-	public void saveOrUpdateUser_Details(User_Details user_Details) {
-		sessionFactory.getCurrentSession().saveOrUpdate(user_Details);
-
+	public boolean saveUser_Details(User_Details user_Details) {
+		try{
+		sessionFactory.getCurrentSession().save(user_Details);
+		}catch(HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
 	}
+
+	@Transactional
+	public boolean updateUser_Details(User_Details user_Details) {
+		try{
+			sessionFactory.getCurrentSession().update(user_Details);
+		}catch(HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 
 	@Transactional
 	public void deleteUser_Details(String Id) {

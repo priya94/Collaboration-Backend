@@ -1,34 +1,33 @@
 package com.niit.collaborationwebsite.model;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
-
 @Entity
 @Component
-
-
-public class Blogg_Comment extends BaseDomain{
+public class Forum_Comment extends BaseDomain{
 
 	@Id
-	private String bCId;
-	private String bCContent;
+	private String fCId;
+	private String fCContent;
 	private String userId;
 	private Date commentedat;
 	
-	public String getbCId() {
-		return bCId;
+	
+	public String getfCId() {
+		return fCId;
 	}
-	public void setbCId(String bCId) {
-		this.bCId = bCId;
+	public void setfCId(String fCId) {
+		this.fCId = fCId;
 	}
-	public String getbCContent() {
-		return bCContent;
+	public String getfCContent() {
+		return fCContent;
 	}
-	public void setbCContent(String bCContent) {
-		this.bCContent = bCContent;
+	public void setfCContent(String fCContent) {
+		this.fCContent = fCContent;
 	}
 	public String getUserId() {
 		return userId;

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 
-public class Blogg {
+public class Blogg extends BaseDomain{
 
 	@Id
 	private String Id;

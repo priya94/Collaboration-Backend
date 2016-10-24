@@ -14,19 +14,22 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.niit.collaborationwebsite.model.User_Details;
 import com.niit.collaborationwebsite.model.Forum;
+import com.niit.collaborationwebsite.model.Forum_Comment;
+import com.niit.collaborationwebsite.model.Friend;
+import com.niit.collaborationwebsite.model.Job;
+import com.niit.collaborationwebsite.model.Role;
 import com.niit.collaborationwebsite.model.Event;
 import com.niit.collaborationwebsite.model.Blogg;
 import com.niit.collaborationwebsite.model.Blogg_Comment;
-
-
-
+@EnableWebMvc
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("com.niit")
-public class ApplicationContextConfig {
+public class ApplicationContextConfig extends WebMvcConfigurerAdapter{
 
 	@Bean(name = "datasource")
 	public DataSource getOracleDatasource() {
@@ -43,8 +46,6 @@ public class ApplicationContextConfig {
 		return datasource;
 	}
 
-	
-		
 	@Bean
 	public SessionFactory getSessionFactory(DataSource datasource) {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(datasource);
@@ -54,6 +55,13 @@ public class ApplicationContextConfig {
 		sessionBuilder.addAnnotatedClass(Event.class);
 		sessionBuilder.addAnnotatedClass(Blogg.class);
 		sessionBuilder.addAnnotatedClass(Blogg_Comment.class);
+		sessionBuilder.addAnnotatedClass(Forum_Comment.class);
+		sessionBuilder.addAnnotatedClass(Friend.class);
+		sessionBuilder.addAnnotatedClass(Job.class);
+		sessionBuilder.addAnnotatedClass(Role.class);
+		
+		
+		
 
 		return sessionBuilder.buildSessionFactory();
 	}

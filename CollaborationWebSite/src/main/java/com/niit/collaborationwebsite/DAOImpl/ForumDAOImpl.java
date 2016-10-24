@@ -3,6 +3,7 @@ package com.niit.collaborationwebsite.DAOImpl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborationwebsite.DAO.ForumDAO;
 import com.niit.collaborationwebsite.DAO.User_DetailsDAO;
+import com.niit.collaborationwebsite.model.Event;
 import com.niit.collaborationwebsite.model.Forum;
 import com.niit.collaborationwebsite.model.User_Details;
 
@@ -28,9 +30,26 @@ public class ForumDAOImpl implements ForumDAO{
 	}
 
 	@Transactional
-	public void saveOrUpdateForum(Forum forum) {
-		sessionFactory.getCurrentSession().saveOrUpdate(forum);
+	public boolean saveForum(Forum forum) {
+		try{
+		sessionFactory.getCurrentSession().save(forum);
+		}catch(HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
 
+	@Transactional
+	public boolean updateForum(Forum forum) {
+		try{
+			sessionFactory.getCurrentSession().update(forum);
+		}catch(HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Transactional
@@ -59,6 +78,14 @@ public class ForumDAOImpl implements ForumDAO{
 		return listOfForum;
 	}
 
-	
+	private Integer getMaxId()
+	{
+		String hql = "select max(id) from Forum";
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		Integer maxID = (Integer) query.uniqueResult();
+		return maxID;
+		
+	}
 	
 }

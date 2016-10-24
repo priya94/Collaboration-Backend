@@ -7,7 +7,9 @@ import com.niit.collaborationwebsite.model.Blogg;
 
 public interface BloggDAO {
 
-	void saveOrUpdateBlogg(Blogg blogg);
+	public boolean saveBlogg(Blogg blogg);
+	
+	public boolean updateBlogg(Blogg blogg);
 
 	void deleteBlogg(String Id);
 

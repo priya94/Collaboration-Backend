@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 
-public class Event {
+public class Event extends BaseDomain{
 
 	@Id
 	private String Id;
 	private String content;
-	private Date event_date;
+	private String event_date;
 	private Date posted_date;
 	public String getId() {
 		return Id;
@@ -30,10 +30,11 @@ public class Event {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getEvent_date() {
+	
+	public String getEvent_date() {
 		return event_date;
 	}
-	public void setEvent_date(Date event_date) {
+	public void setEvent_date(String event_date) {
 		this.event_date = event_date;
 	}
 	public Date getPosted_date() {

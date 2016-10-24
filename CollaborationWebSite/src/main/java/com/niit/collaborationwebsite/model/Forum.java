@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-public class Forum {
+public class Forum extends BaseDomain{
 
 	@Id
 	private String Id;

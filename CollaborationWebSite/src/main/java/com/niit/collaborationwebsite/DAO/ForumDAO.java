@@ -5,8 +5,11 @@ import java.util.List;
 import com.niit.collaborationwebsite.model.Forum;
 
 public interface ForumDAO {
-	void saveOrUpdateForum(Forum forum);
-
+	
+	public boolean saveForum(Forum forum);
+	
+	public boolean updateForum(Forum forum);
+	
 	void deleteForum(String Id);
 
 	Forum getForum(String Id);

@@ -3,6 +3,7 @@ package com.niit.collaborationwebsite.DAOImpl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 
@@ -14,12 +15,9 @@ import com.niit.collaborationwebsite.DAO.BloggDAO;
 import com.niit.collaborationwebsite.model.Blogg;
 import com.niit.collaborationwebsite.model.Event;
 
-
-
-
 @Repository("bloggDAO")
 
-public class BloggDAOImpl implements BloggDAO{
+public class BloggDAOImpl implements BloggDAO {
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -29,9 +27,25 @@ public class BloggDAOImpl implements BloggDAO{
 	}
 
 	@Transactional
-	public void saveOrUpdateBlogg(Blogg blogg) {
-		sessionFactory.getCurrentSession().saveOrUpdate(blogg);
-
+	public boolean saveBlogg(Blogg blogg) {
+		try{
+		sessionFactory.getCurrentSession().save(blogg);
+		}catch(HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	@Transactional
+	public boolean updateBlogg(Blogg blogg) {
+		try{
+			sessionFactory.getCurrentSession().update(blogg);
+		}catch(HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Transactional
@@ -41,7 +55,7 @@ public class BloggDAOImpl implements BloggDAO{
 		sessionFactory.getCurrentSession().delete(bloggToDelete);
 
 	}
-	
+
 	@Transactional
 	public Blogg getBlogg(String Id) {
 		String hql = "from Blogg where Id=:Id";
@@ -60,5 +74,4 @@ public class BloggDAOImpl implements BloggDAO{
 		return listOfBlogg;
 	}
 
-	
 }
