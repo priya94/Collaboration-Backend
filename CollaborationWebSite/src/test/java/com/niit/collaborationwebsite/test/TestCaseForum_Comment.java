@@ -3,38 +3,36 @@ package com.niit.collaborationwebsite.test;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.niit.collaborationwebsite.DAO.ForumDAO;
-import com.niit.collaborationwebsite.DAO.User_DetailsDAO;
+import com.niit.collaborationwebsite.DAO.Forum_CommentDAO;
 
+public class TestCaseForum_Comment {
 
-public class TestCaseForum {
 	@Autowired
-	ForumDAO forumDAO;
+	Forum_CommentDAO forum_CommentDAO;
 	
 	AnnotationConfigApplicationContext context;
 	
 	@Before
-	public void init() {
-
+	public void init()
+	{
 		context = new AnnotationConfigApplicationContext();
 		context.scan("com.niit");
 		context.refresh();
-		forumDAO = (ForumDAO) context.getBean("forumDAO");
-       }
-
-	@Test
-	public void ForumTestCase()
-	{
-		int size = forumDAO.listForum().size();
-		assertEquals("forum list test case ", 1, size);
+		forum_CommentDAO = (Forum_CommentDAO) context.getBean("forum_CommentDAO");
 		
 	}
 	
+	@Test
+	public void Forum_CommentTestCase()
+	{
+		int size = forum_CommentDAO.listForum_Comments().size();
+		assertEquals("forum list test case",1,size);
+	}
 	
 	
-
 }

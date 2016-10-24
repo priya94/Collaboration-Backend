@@ -19,8 +19,8 @@ public static void main(String[] args) {
 		Blogg_Comment blogg_Comment = (Blogg_Comment) context.getBean("blogg_Comment");
 		
 	
-		blogg_Comment.setbCId("BC01");
-		blogg_Comment.setbCContent("No Blogg comments currently");
+		blogg_Comment.setbCId("BC02");
+		blogg_Comment.setbCContent("No BloggComments currently");
 		blogg_Comment.setUserId("USER1");
 		blogg_Comment.setCommentedat(new Date(System.currentTimeMillis()));
 		

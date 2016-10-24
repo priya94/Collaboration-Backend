@@ -28,7 +28,7 @@ public static void main(String[] args) {
 		
 		
 		
-		user_DetailsDAO.saveOrUpdateUser_Details(user_Details);
+		user_DetailsDAO.saveUser_Details(user_Details);
 		
 	    
 	    if(user_DetailsDAO.getUser_Details("US1")== null)

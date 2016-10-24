@@ -19,19 +19,14 @@ public static void main(String[] args) {
 		BloggDAO bloggDAO = (BloggDAO) context.getBean("bloggDAO");
 		Blogg blogg = (Blogg) context.getBean("blogg");
 		
-		
 		blogg.setId("BLOG2");
 		blogg.setTitle("collaboration2");
 		blogg.setDescription("No Blogg Currently");
 		blogg.setCreatedat(new Date(System.currentTimeMillis()));
 		blogg.setStatus("A");
+		bloggDAO.saveBlogg(blogg);
 		
-		
-		
-		bloggDAO.saveOrUpdateBlogg(blogg);
-		
-	    
-	    if(bloggDAO.getBlogg("BLG1")== null)
+		if(bloggDAO.getBlogg("BLG1")== null)
 		{
 			System.out.println("Blogg does not exist");
 		}

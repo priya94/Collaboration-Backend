@@ -21,14 +21,14 @@ public static void main(String[] args) {
 		
 		event.setId("USER1");
 		event.setContent("No contents currently");
-		event.setEvent_date(new Date(System.currentTimeMillis()));
+		event.setEvent_date("27 th december");
 		event.setPosted_date(new Date(System.currentTimeMillis()));
 		
 		
 		
 		
 		
-		eventDAO.saveOrUpdateEvent(event);
+		eventDAO.saveEvent(event);
 		
 	    
 	    if(eventDAO.getEvent("US1")== null)

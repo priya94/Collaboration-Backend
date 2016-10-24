@@ -31,7 +31,7 @@ public static void main(String[] args) {
 		
 		
 		
-		forumDAO.saveOrUpdateForum(forum);
+		forumDAO.saveForum(forum);
 		
 	    
 	    if(forumDAO.getForum("US1")== null)

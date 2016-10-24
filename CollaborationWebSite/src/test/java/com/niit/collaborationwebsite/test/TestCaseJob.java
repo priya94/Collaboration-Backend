@@ -1,21 +1,21 @@
 package com.niit.collaborationwebsite.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.niit.collaborationwebsite.DAO.ForumDAO;
-import com.niit.collaborationwebsite.DAO.User_DetailsDAO;
+import com.niit.collaborationwebsite.DAO.Blogg_CommentDAO;
+import com.niit.collaborationwebsite.DAO.JobDAO;
 
+public class TestCaseJob {
 
-public class TestCaseForum {
 	@Autowired
-	ForumDAO forumDAO;
+	JobDAO jobDAO;
 	
-	AnnotationConfigApplicationContext context;
+AnnotationConfigApplicationContext context;
 	
 	@Before
 	public void init() {
@@ -23,18 +23,17 @@ public class TestCaseForum {
 		context = new AnnotationConfigApplicationContext();
 		context.scan("com.niit");
 		context.refresh();
-		forumDAO = (ForumDAO) context.getBean("forumDAO");
-       }
+		jobDAO = (JobDAO) context.getBean("jobDAO");
+
+
+	}
 
 	@Test
-	public void ForumTestCase()
+	public void JobTestCase()
 	{
-		int size = forumDAO.listForum().size();
-		assertEquals("forum list test case ", 1, size);
+		int size = jobDAO.listJobs().size();
+		assertEquals("job list test case ", 1, size);
 		
 	}
 	
-	
-	
-
 }

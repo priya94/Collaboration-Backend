@@ -1,21 +1,20 @@
 package com.niit.collaborationwebsite.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.niit.collaborationwebsite.DAO.ForumDAO;
-import com.niit.collaborationwebsite.DAO.User_DetailsDAO;
+import com.niit.collaborationwebsite.DAO.RoleDAO;
 
+public class TestCaseRole {
 
-public class TestCaseForum {
 	@Autowired
-	ForumDAO forumDAO;
+	RoleDAO roleDAO;
 	
-	AnnotationConfigApplicationContext context;
+AnnotationConfigApplicationContext context;
 	
 	@Before
 	public void init() {
@@ -23,18 +22,17 @@ public class TestCaseForum {
 		context = new AnnotationConfigApplicationContext();
 		context.scan("com.niit");
 		context.refresh();
-		forumDAO = (ForumDAO) context.getBean("forumDAO");
-       }
+		roleDAO = (RoleDAO) context.getBean("roleDAO");
+
+
+	}
 
 	@Test
-	public void ForumTestCase()
+	public void RoleTestCase()
 	{
-		int size = forumDAO.listForum().size();
-		assertEquals("forum list test case ", 1, size);
+		int size = roleDAO.listRoles().size();
+		assertEquals("role list test case ", 2, size);
 		
 	}
 	
-	
-	
-
 }
